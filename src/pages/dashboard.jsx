@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { List, Input, Button, Modal, Card, Row, Col } from 'antd';
+import { List, Input, Button, Modal, Card, Row, Col, Checkbox } from 'antd';
 import axios from 'axios';
 
 const Dashboard = () => {
@@ -31,6 +31,21 @@ const Dashboard = () => {
     const closeModal = () => {
         setModal(false);
     };
+
+    const data = [
+        {
+            title: 'Clean the room',
+        },
+        {
+            title: 'Buy some vegetables, chicken & chips',
+        },
+        {
+            title: 'Reinstall windows on PC',
+        },
+        {
+            title: 'Start to work on show feature',
+        },
+    ];
     // const [input, setInput] = useState({ name: '', apiKey: '' })
 
     // const onChange = (e) => {
@@ -74,11 +89,10 @@ const Dashboard = () => {
 
                 >Logout</a>
             </div>
-            <div style={{
-                marginTop: '2em'
-            }}>
+
+            <div style={{ marginTop: '2em' }}>
                 <Row gutter={16}>
-                    <Col span={8}>
+                    <Col lg={8} md={8} sm={24} xs={24}>
                         <Card style={{
                             padding: '30px'
                         }}>
@@ -86,7 +100,7 @@ const Dashboard = () => {
                         </Card>
                     </Col>
 
-                    <Col span={8}>
+                    <Col lg={8} md={8} sm={24} xs={24}>
                         <Card style={{
                             padding: '30px'
                         }}>
@@ -94,7 +108,7 @@ const Dashboard = () => {
                         </Card>
                     </Col>
 
-                    <Col span={8}>
+                    <Col lg={8} md={8} sm={24} xs={24}>
                         <Card style={{
                             padding: '30px'
                         }}>
@@ -105,30 +119,59 @@ const Dashboard = () => {
                 </Row>
             </div>
 
-            <div style={{
-                marginTop: '50px',
-                marginLeft: '50px',
-                border: '1px solid black',
-                width: 'fit-content',
-                height: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '10px'
-            }}>
-                <span>You have no task</span>
-                <Button
-                    style={{
-                        backgroundColor: '#5285EC',
-                        color: 'white',
-                        width: '100px'
-                    }}
-                    onClick={openModal}
-                >New Task</Button>
+
+            <div style={{ margin: '20px' }}>
+                <Row gutter={16}>
+                    <Col lg={15} md={10} sm={24} xs={24}>
+                        <span>Tasks</span>
+                    </Col>
+
+                    <Col lg={6} md={10} sm={24} xs={24}>
+                        <Input
+                            placeholder='Search by task name'
+                        />
+                    </Col>
+
+                    <Col lg={3} md={10} sm={24} xs={24}>
+                        <Button
+                            style={{
+                                width: '100%',
+                                backgroundColor: '#5285EC',
+                                color: 'white'
+                            }}
+                        >New Task
+                        </Button>
+                    </Col>
+                </Row>
             </div>
 
-            <List>
-                
-            </List>
+            <div style={{
+                backgroundColor: 'white',
+                // boxShadow: '1px 1px 1px grey',
+                width: 'auto',
+                height: 'auto',
+                border: '1px solid grey',
+                borderRadius: '5px',
+                padding: '15px'
+            }}>
+                <Row gutter={16}>
+                    <Col lg={24} md={24} sm={24} xs={24}>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={item => (
+                                <List.Item gap='10px'>
+                                    <Checkbox />
+                                    <List.Item.Meta
+                                        title={<a>{item.title}</a>}
+                                        actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </Col>
+                </Row>
+            </div>
 
             <div>
                 <Modal

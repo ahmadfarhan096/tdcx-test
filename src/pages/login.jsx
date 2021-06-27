@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {useHistory} from 'react-router-dom';
-import { Input, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { Input, Button, Row, Col } from 'antd';
 import axios from 'axios';
 
 const Login = () => {
@@ -16,11 +16,11 @@ const Login = () => {
     const onSubmit = async (e) => {
         //must use this pattern for axios
         try {
-            const response= await axios({
-                url:`${process.env.REACT_APP_API_URL}login`,
-                method:'POST',
+            const response = await axios({
+                url: `${process.env.REACT_APP_API_URL}login`,
+                method: 'POST',
                 //body to send to api
-                data:input,
+                data: input,
             })
             console.log(response);
             //backend usually use 200 for success
@@ -34,58 +34,66 @@ const Login = () => {
 
     return (
         <Fragment>
+            <Row>
+                <div style={{
+                    backgroundColor: 'white',
+                    boxShadow: '1px 1px 1px grey',
+                    width: 'auto',
+                    height: 'auto',
+                    borderRadius: '5px',
+                    padding: '15px'
 
-            <div style={{
-                backgroundColor: 'white',
-                boxShadow: '1px 1px 1px black',
-                width: 'auto',
-                height: 'auto',
-                borderRadius: '2px',
-                padding: '15px'
-            }}>
-                <div><h3>Login</h3></div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-
-                    }}>
-
-                    <Input
-                        name="name"
-                        value={input.name}
+                }}>
+                    <Col>
+                    <div><h3>Login</h3></div>
+                    <div
                         style={{
-                            margin: '10px'
-                        }}
-                        onChange={onChange}
-                    >
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            color: '#537178'
+                        }}>
 
-                    </Input>
+                        <Input
+                            name="apiKey"
+                            value={input.apiKey}
+                            style={{
+                                margin: '10px'
+                            }}
+                            onChange={onChange}
+                            placeholder='Id'
+                        />
 
-                    <Input
-                        name="apiKey"
-                        value={input.apiKey}
-                        style={{
-                            margin: '10px'
-                        }}
-                        onChange={onChange}
-                    >
+                       
 
-                    </Input>
 
-                    <Button
-                        style={{
-                            width: '100%',
-                            backgroundColor: '#5285EC',
-                            color: 'white'
-                        }}
-                        onClick={onSubmit}
-                    >Login</Button>
+                        <Input
+                            style={{ backgroundColor: '#EEF1F8' }}
+                            name="name"
+                            value={input.name}
+                            style={{
+                                margin: '10px'
+                            }}
+                            onChange={onChange}
+                            placeholder='Name'
+
+                        />
+
+                      
+
+
+                        <Button
+                            style={{
+                                width: '100%',
+                                backgroundColor: '#5285EC',
+                                color: 'white'
+                            }}
+                            onClick={onSubmit}
+                        >Login</Button>
+                    </div>
+                    </Col>
                 </div>
-
-            </div>
-
+            </Row>
         </Fragment>
     )
 
